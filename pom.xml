@@ -5,23 +5,27 @@
     <groupId>io.github.mat3e</groupId>
     <artifactId>ToDoList</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <packaging>war</packaging>
 
     <name>ToDoList</name>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-        <java.version>12.0.2</java.version>
+        <java.version>12</java.version>
         <junit.version>4.12</junit.version>
         <slf4j.version>1.7.25</slf4j.version>
         <servlet.version>4.0.1</servlet.version>
+        <jetty.version>9.4.28.v20200408</jetty.version>
     </properties>
     <dependencies>
+    <!-- test-->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>${junit.version}</version>
             <scope>test</scope>
         </dependency>
+
+        <!--logging-->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
@@ -34,6 +38,8 @@
             <version>${slf4j.version}</version>
             <scope>compile</scope>
         </dependency>
+
+        <!--http-->
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
@@ -43,6 +49,11 @@
     </dependencies>
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.eclipse.jetty</groupId>
+                <artifactId>jetty-maven-plugin</artifactId>
+                <version>${jetty.version}</version>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-jar-plugin</artifactId>
