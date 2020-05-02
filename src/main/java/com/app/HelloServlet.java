@@ -11,22 +11,31 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Optional;
 
 @WebServlet(name = "Hello", urlPatterns = {"/api/*"})
 
 public class HelloServlet extends HttpServlet {
 
     private final Logger logger = LoggerFactory.getLogger(HelloServlet.class);
+    private HelloService service;
+    private final String name = "name";
+
+    /**
+     * Servlet needs it
+     */
+    @SuppressWarnings("unused")
+    public HelloServlet() {
+        this(new HelloService());
+}
+
+    HelloServlet(HelloService service) {
+        this.service = service;
+    }
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String params = req.getParameter("name");
-        if (params == null) {
-            resp.getWriter().write("Hello world");
-        } else {
-            resp.getWriter().write("Hello " + params);
-        }
-        req.getServletContext();
-
+        logger.info("Got request from " + req.getRequestURI());
+        resp.getWriter().write(service.prepareGreetings(req.getParameter(name)));
     }
 }
