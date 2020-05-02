@@ -20,6 +20,7 @@ public class HelloServlet extends HttpServlet {
     private final Logger logger = LoggerFactory.getLogger(HelloServlet.class);
     private HelloService service;
     private final String name = "name";
+    private final String lang = "lang";
 
     /**
      * Servlet needs it
@@ -36,6 +37,6 @@ public class HelloServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         logger.info("Got request from " + req.getRequestURI());
-        resp.getWriter().write(service.prepareGreetings(req.getParameter(name)));
+        resp.getWriter().write(service.prepareGreeting(req.getParameter(name), req.getParameter(lang)));
     }
 }
