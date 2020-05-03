@@ -6,8 +6,11 @@
         <sourceOutputDir name="target/generated-sources/annotations" />
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
-        <module name="To-do-list-Java" />
+        <module name="ToDoList" />
       </profile>
     </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="ToDoList" target="12" />
+    </bytecodeTargetLevel>
   </component>
 </project>

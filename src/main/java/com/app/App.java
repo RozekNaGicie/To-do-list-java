@@ -18,6 +18,11 @@ public class App {
 
     public static void main(String[] args) throws Exception {
         var webapp = new WebAppContext();
+        var server = new Server(8080);
+        /**
+         * it's should fixed problem with saving html file
+         */
+        webapp.setInitParameter("org.eclipse.jetty.servlet.Default.maxCachedFiles", "0");
         webapp.setResourceBase("/src/main/webapp");
         webapp.setContextPath("/");
         webapp.setConfigurations(new Configuration[]{
@@ -32,7 +37,6 @@ public class App {
         });
         webapp.setAttribute("org.eclipse.jetty.server.webapp.ContainerIncludeJarPattern", ".*/classes/.*");
 //        webapp.addServlet(HelloServlet.class, "/api/*");
-        var server = new Server(8080);
         server.setHandler(webapp);
         server.addLifeCycleListener(new AbstractLifeCycle.AbstractLifeCycleListener() {
             @Override

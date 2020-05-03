@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="https://unpkg.com/purecss@1.0.1/build/pure-min.css" integrity="sha384-oAOxQR6DkCoMliIh8yFnu25d7Eq/PHS21PClpwjOTeU2jRSq11vu66rf90/cZr47" crossorigin="anonymous">
+    <title>ToDo List</title>
+</head>
+<body>
+    <div class = "layer">
+        <h1>To Do List</h1>
+        <form id="to-do-form" class="pure-form">
+            <input type="text" name="name" class="pure-input-rounded"/>
+                <label class="pure-radio">
+            <input type="radio" name="lang" value="1" />🇺🇸</label>
+                <label class="pure-radio">
+            <input type="radio" name="lang" value="2" />🇵🇱</label>
+                <label class="pure-radio">
+            <input type="radio" name="lang" value="3" />🇪🇸</label>
+            <button id="btn" type="submit" class="pure-button pure-button-primary">Submit</button>
+        </form>
+        <div id ="answer"></div>
+    </div>
+</body>
+<style>
+    .layer {
+        margin: 0 auto;
+        width: 40%;
+    }
+    .pure-form {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+    }
+    h1 {
+        text-align: center;
+    }
+</style>
+<script>
+    const btn = document.getElementById("btn");
+    const form = document.getElementById("to-do-form");
+    const answer = document.getElementById("answer");
+    let ans;
+    btn.addEventListener('click', (e)=> {
+        e.preventDefault();
+        const formObj = {
+            name: form.elements.name.value,
+            lang: form.elements.lang.value
+        };
+            fetch("http://localhost:8080/api?" + new URLSearchParams(formObj))
+            .then((response)=>{response.text()
+            .then((text) =>{
+                answer.innerHTML = `<h2>${text}</h2>`
+                })});
+    });
+</script>
+</html>
